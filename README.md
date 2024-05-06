@@ -1,6 +1,6 @@
 ## Personal template for new Go projects
 
-![workflow](https://github.com/bajalnyt/go-template/actions/workflows/go.yml/badge.svg)
+![workflow](https://github.com/bajalnyt/go-template/workflows/Go/badge.svg)
 
 
 What this contains:
