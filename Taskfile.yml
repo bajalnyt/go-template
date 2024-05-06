@@ -1,0 +1,22 @@
+version: "3"
+
+tasks:
+  build:
+    desc: Builds the app
+    cmds:
+      - go build -o ./bin/api ./cmd/api
+
+  lint:
+    desc: Lints the code
+    cmds:
+      - golangci-lint run
+
+  run:
+    desc: Runs the app locally
+    cmds:
+      - go run ./cmd/api
+
+  run-docker:
+    desc: Runs the app in a docker container
+    cmds:
+      - docker-compose up --build --force-recreate

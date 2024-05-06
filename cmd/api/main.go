@@ -10,7 +10,7 @@ import (
 )
 
 const version = "0.0.1"
-const defaultPort = 4000
+const defaultPort = 8081
 
 type config struct {
 	port int
@@ -36,6 +36,8 @@ func main() {
 		logger: logger,
 	}
 
+	const readTimeout = 10 * time.Second
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/v1/healthcheck", app.healthcheckHandler)
 
@@ -43,9 +45,9 @@ func main() {
 		Addr:              fmt.Sprintf(":%d", cfg.port),
 		Handler:           mux,
 		IdleTimeout:       time.Minute,
-		ReadTimeout:       10 * time.Second,
-		WriteTimeout:      10 * time.Second,
-		ReadHeaderTimeout: 10 * time.Second,
+		ReadTimeout:       readTimeout,
+		WriteTimeout:      time.Second,
+		ReadHeaderTimeout: time.Second,
 	}
 
 	logger.Printf("starting %s server on %d", cfg.env, cfg.port)

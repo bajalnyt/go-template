@@ -1,9 +1,8 @@
-FROM golang:1.19-alpine3.15 as builder
+FROM golang:1.21-alpine3.18 as builder
 
 WORKDIR /app
 
 COPY . .
-RUN go mod download
 
 # Build the binary.
 RUN CGO_ENABLED=0 GOOS=linux go build -v -o /bin/myapp cmd/api

@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    # depends_on:
+    #   - redis
+    environment:
+      - PORT=8081
+      - ENV=local
+      - REDIS_ADDR=redis:6379
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "--fail",
+          "http://localhost:8081/healthz"
+        ]
+      interval: 3s
+      retries: 5
+      start_period: 3s
+      timeout: 30s
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - "6379:6379"
