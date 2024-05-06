@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -50,7 +51,7 @@ func main() {
 		ReadHeaderTimeout: time.Second,
 	}
 
-	logger.Printf("starting %s server on %d", cfg.env, cfg.port)
+	logger.Printf("starting %s server, healthcheck: %s", cfg.env, "http://localhost:"+strconv.Itoa(cfg.port)+"/v1/healthcheck")
 
 	err := srv.ListenAndServe()
 	logger.Fatal(err)
